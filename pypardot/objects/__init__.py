@@ -20,6 +20,7 @@ from .visits import Visits
 from .visitors import Visitors
 from .visitoractivities import VisitorActivities
 from .campaigns import Campaigns
+from .exports import Exports
 
 
 def load_objects(client):
@@ -45,3 +46,4 @@ def load_objects(client):
     client.visits = Visits(client)
     client.visitors = Visitors(client)
     client.visitoractivities = VisitorActivities(client)
+    client.exports = Exports(client)
