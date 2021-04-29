@@ -156,7 +156,7 @@ Allow access if any alert popup. You will be redirected to a login page, but do 
                 return response
             elif err.message == 'access_token is invalid, unknown, or malformed':
                 response = self._handle_expired_token(
-                    err, retries, 'post', headers, object_name, path, params, data, files)
+                    err, retries, 'post', headers, object_name, path, params, data, files, json)
                 return response
             else:
                 raise err
@@ -255,7 +255,8 @@ Allow access if any alert popup. You will be redirected to a login page, but do 
         else:
             raise err
 
-    def _handle_expired_token(self, err, retries, method, headers, object_name, path, params, data=None, files=None):
+    def _handle_expired_token(self, err, retries, method, headers, object_name, path, params, data=None, files=None,
+                              json=None):
         """
         Tries to refresh an expired token and re-issue the HTTP request. If the refresh has already been attempted,
         an error is raised.
@@ -266,7 +267,7 @@ Allow access if any alert popup. You will be redirected to a login page, but do 
         self.refresh_sf_token()
         if self.sftoken:
             response = getattr(self, method)(
-                object_name=object_name, path=path, params=params, data=data,
+                object_name=object_name, path=path, params=params, data=data, json=json,
                 files=files, headers=headers, retries=1)
             return response
         else:
@@ -294,7 +295,7 @@ Allow access if any alert popup. You will be redirected to a login page, but do 
                 raise PardotAPIError(json_response=json)
             return json
         else:
-            return response.status_code
+            return response
 
     def _check_auth(self, object_name):
         if object_name == 'login':
