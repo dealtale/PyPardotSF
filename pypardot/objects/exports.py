@@ -32,7 +32,7 @@ class Exports(object):
             shutil.copyfileobj(export_file_contents, result_file)
 
         with open(tmp_file_name, 'r') as result_file:
-            csv_reader = csv.DictReader(result_file)
+            csv_reader = csv.DictReader(data.replace('\0', '') for data in result_file)
             for data_row in csv_reader:
                 all_records.append(data_row)
         return all_records
