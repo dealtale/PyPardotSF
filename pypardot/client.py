@@ -223,7 +223,7 @@ Allow access if any alert popup. You will be redirected to a login page, but do 
         params.update({'format': 'json'})
         headers = self._build_auth_header()
         try:
-            self._check_auth(object_name=object_name)
+            # self._check_auth(object_name=object_name)
             request = requests.get(self._full_path(object_name, self.version, path), params=params, headers=headers)
             response = self._check_response(request)
             return response
