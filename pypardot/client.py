@@ -136,7 +136,7 @@ Allow access if any alert popup. You will be redirected to a login page, but do 
                 f.seek(0)
 
         try:
-            self._check_auth(object_name=object_name)
+            # self._check_auth(object_name=object_name)
             request = requests.post(self._full_path(object_name, self.version, path),
                                     headers=headers,
                                     params=params,

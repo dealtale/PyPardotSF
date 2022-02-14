@@ -30,12 +30,7 @@ class Exports(object):
         with open(tmp_file_name, 'w') as result_file:
             export_file_contents.seek(0)
             shutil.copyfileobj(export_file_contents, result_file)
-
-        with open(tmp_file_name, 'r') as result_file:
-            csv_reader = csv.DictReader(data.replace('\0', '') for data in result_file)
-            for data_row in csv_reader:
-                all_records.append(data_row)
-        return all_records
+        return tmp_file_name
 
 
     def _get(self, object_name='export', path=None, params=None):
